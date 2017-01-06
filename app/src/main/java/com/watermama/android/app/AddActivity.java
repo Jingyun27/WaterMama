@@ -41,7 +41,7 @@ public class AddActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_editor);
+        setContentView(R.layout.activity_add);
         Intent intent = getIntent();
         mCurrentUri = intent.getData();
         if (mCurrentUri == null) {
@@ -83,19 +83,19 @@ public class AddActivity extends AppCompatActivity implements
         if (mCurrentUri == null) {
             Uri newUri = getContentResolver().insert(Entry.CONTENT_URI, values);
             if (newUri == null) {
-                Toast.makeText(this, getString(R.string.editor_insert_pet_failed),
+                Toast.makeText(this, getString(R.string.editor_insert_record_failed),
                         Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, getString(R.string.editor_insert_pet_successful),
+                Toast.makeText(this, getString(R.string.editor_insert_record_successful),
                         Toast.LENGTH_SHORT).show();
             }
         } else {
             int rowsAffected = getContentResolver().update(mCurrentUri, values, null, null);
             if (rowsAffected == 0) {
-                Toast.makeText(this, getString(R.string.editor_update_pet_failed),
+                Toast.makeText(this, getString(R.string.editor_update_record_failed),
                         Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, getString(R.string.editor_update_pet_successful),
+                Toast.makeText(this, getString(R.string.editor_update_record_successful),
                         Toast.LENGTH_SHORT).show();
             }
         }
@@ -103,7 +103,7 @@ public class AddActivity extends AppCompatActivity implements
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_editor, menu);
+        getMenuInflater().inflate(R.menu.menu_add, menu);
         return true;
     }
 

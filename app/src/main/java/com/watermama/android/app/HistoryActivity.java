@@ -22,7 +22,7 @@ import com.watermama.android.app.data.WatermamaContract;
 import com.watermama.android.app.data.WatermamaContract.Entry;
 
 
-public class MainActivity extends AppCompatActivity implements
+public class HistoryActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
     private static final int PET_LOADER = 0;
     DrinkCursorAdapter mCursorAdapter;
@@ -30,12 +30,12 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_catalog);
+        setContentView(R.layout.activity_main);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, AddActivity.class);
+                Intent intent = new Intent(HistoryActivity.this, AddActivity.class);
                 startActivity(intent);
             }
         });
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements
         petListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Intent intent = new Intent(MainActivity.this, AddActivity.class);
+                Intent intent = new Intent(HistoryActivity.this, AddActivity.class);
                 Uri currentPetUri = ContentUris.withAppendedId(Entry.CONTENT_URI, id);
                 intent.setData(currentPetUri);
                 startActivity(intent);
@@ -58,20 +58,20 @@ public class MainActivity extends AppCompatActivity implements
 
     private void insertPet() {
         ContentValues values = new ContentValues();
-        values.put(WatermamaContract.Entry.COLUMN_DATE, "Toto");
-        values.put(Entry.COLUMN_TIME, "Terrier");
-        values.put(Entry.COLUMN_VOLUME, 7);
+        values.put(WatermamaContract.Entry.COLUMN_DATE, "20170104");
+        values.put(Entry.COLUMN_TIME, "0914");
+        values.put(Entry.COLUMN_VOLUME, 120);
         Uri newUri = getContentResolver().insert(Entry.CONTENT_URI, values);
     }
 
     private void deleteAllPets() {
         int rowsDeleted = getContentResolver().delete(WatermamaContract.Entry.CONTENT_URI, null, null);
-        Log.v("MainActivity", rowsDeleted + " rows deleted from pet database");
+        Log.v("HistoryActivity", rowsDeleted + " rows deleted from pet database");
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_catalog, menu);
+        getMenuInflater().inflate(R.menu.menu_history, menu);
         return true;
     }
 

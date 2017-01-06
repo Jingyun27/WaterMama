@@ -27,10 +27,11 @@ public class DrinkCursorAdapter extends CursorAdapter {
         TextView summaryTextView = (TextView) view.findViewById(R.id.summary);
         int dateColumnIndex = cursor.getColumnIndex(Entry.COLUMN_DATE);
         int timeColumnIndex = cursor.getColumnIndex(Entry.COLUMN_TIME);
+        int volumeColumnIndex = cursor.getColumnIndex(Entry.COLUMN_VOLUME);
         String drinkDate = cursor.getString(dateColumnIndex);
         String drinkTime = cursor.getString(timeColumnIndex);
         if (TextUtils.isEmpty(drinkTime)) {
-            drinkTime = context.getString(R.string.unknown_breed);
+            drinkTime = context.getString(R.string.unknown_time);
         }
         nameTextView.setText(drinkDate);
         summaryTextView.setText(drinkTime);
