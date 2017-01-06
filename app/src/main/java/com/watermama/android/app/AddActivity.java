@@ -62,22 +62,22 @@ public class AddActivity extends AppCompatActivity implements
 
 
     private void savePet() {
-        String nameString = mDateEditText.getText().toString().trim();
-        String breedString = mTimeEditText.getText().toString().trim();
-        String weightString = mVolumeEditText.getText().toString().trim();
+        String dateString = mDateEditText.getText().toString().trim();
+        String timeString = mTimeEditText.getText().toString().trim();
+        String volumeString = mVolumeEditText.getText().toString().trim();
 
         if (mCurrentUri == null &&
-                TextUtils.isEmpty(nameString) && TextUtils.isEmpty(breedString)) {
+                TextUtils.isEmpty(dateString) && TextUtils.isEmpty(timeString)) {
             return;
         }
 
         ContentValues values = new ContentValues();
-        values.put(WatermamaContract.Entry.COLUMN_DATE, nameString);
-        values.put(WatermamaContract.Entry.COLUMN_TIME, breedString);
+        values.put(WatermamaContract.Entry.COLUMN_DATE, dateString);
+        values.put(WatermamaContract.Entry.COLUMN_TIME, timeString);
 
         int weight = 0;
-        if (!TextUtils.isEmpty(weightString)) {
-            weight = Integer.parseInt(weightString);
+        if (!TextUtils.isEmpty(volumeString)) {
+            weight = Integer.parseInt(volumeString);
         }
         values.put(Entry.COLUMN_VOLUME, weight);
         if (mCurrentUri == null) {

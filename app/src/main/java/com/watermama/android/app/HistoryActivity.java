@@ -24,7 +24,7 @@ import com.watermama.android.app.data.WatermamaContract.Entry;
 
 public class HistoryActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
-    private static final int PET_LOADER = 0;
+    private static final int RECORD_LOADER = 0;
     DrinkCursorAdapter mCursorAdapter;
 
     @Override
@@ -48,12 +48,12 @@ public class HistoryActivity extends AppCompatActivity implements
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Intent intent = new Intent(HistoryActivity.this, AddActivity.class);
-                Uri currentPetUri = ContentUris.withAppendedId(Entry.CONTENT_URI, id);
-                intent.setData(currentPetUri);
+                Uri currentRecordUri = ContentUris.withAppendedId(Entry.CONTENT_URI, id);
+                intent.setData(currentRecordUri);
                 startActivity(intent);
             }
         });
-        getLoaderManager().initLoader(PET_LOADER, null, this);
+        getLoaderManager().initLoader(RECORD_LOADER, null, this);
     }
 
     private void insertPet() {
@@ -64,7 +64,7 @@ public class HistoryActivity extends AppCompatActivity implements
         Uri newUri = getContentResolver().insert(Entry.CONTENT_URI, values);
     }
 
-    private void deleteAllPets() {
+    private void deleteAllRecords() {
         int rowsDeleted = getContentResolver().delete(WatermamaContract.Entry.CONTENT_URI, null, null);
         Log.v("HistoryActivity", rowsDeleted + " rows deleted from pet database");
     }
@@ -82,7 +82,7 @@ public class HistoryActivity extends AppCompatActivity implements
                 insertPet();
                 return true;
             case R.id.action_delete_all_entries:
-                deleteAllPets();
+                deleteAllRecords();
                 return true;
         }
         return super.onOptionsItemSelected(item);
