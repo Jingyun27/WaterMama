@@ -19,6 +19,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import com.watermama.android.app.data.WatermamaContract;
 import com.watermama.android.app.data.WatermamaContract.Entry;
@@ -52,9 +54,10 @@ public class AddActivity extends AppCompatActivity implements
             getLoaderManager().initLoader(EXISTING_PET_LOADER, null, this);
         }
 
-        mDateEditText = (EditText) findViewById(R.id.edit_pet_name);
-        mTimeEditText = (EditText) findViewById(R.id.edit_pet_breed);
-        mVolumeEditText = (EditText) findViewById(R.id.edit_pet_weight);
+
+        mDateEditText = (EditText) findViewById(R.id.edit_date);
+        mTimeEditText = (EditText) findViewById(R.id.edit_time);
+        mVolumeEditText = (EditText) findViewById(R.id.edit_volume);
         mDateEditText.setOnTouchListener(mTouchListener);
         mTimeEditText.setOnTouchListener(mTouchListener);
         mVolumeEditText.setOnTouchListener(mTouchListener);
@@ -62,8 +65,18 @@ public class AddActivity extends AppCompatActivity implements
 
 
     private void savePet() {
+        SimpleDateFormat sdf_date = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat sdf_time = new SimpleDateFormat("HH:mm");
+        Date now = new Date();
         String dateString = mDateEditText.getText().toString().trim();
+        if("".equals(dateString)){
+            dateString = sdf_date.format(now);
+        }
         String timeString = mTimeEditText.getText().toString().trim();
+        if("".equals(timeString)){
+            timeString = sdf_time.format(now);
+        }
+
         String volumeString = mVolumeEditText.getText().toString().trim();
 
         if (mCurrentUri == null &&
@@ -75,11 +88,11 @@ public class AddActivity extends AppCompatActivity implements
         values.put(WatermamaContract.Entry.COLUMN_DATE, dateString);
         values.put(WatermamaContract.Entry.COLUMN_TIME, timeString);
 
-        int weight = 0;
+        int volume = 0;
         if (!TextUtils.isEmpty(volumeString)) {
-            weight = Integer.parseInt(volumeString);
+            volume = Integer.parseInt(volumeString);
         }
-        values.put(Entry.COLUMN_VOLUME, weight);
+        values.put(Entry.COLUMN_VOLUME, volume);
         if (mCurrentUri == null) {
             Uri newUri = getContentResolver().insert(Entry.CONTENT_URI, values);
             if (newUri == null) {
