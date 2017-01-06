@@ -240,7 +240,7 @@ public class AddActivity extends AppCompatActivity implements
         builder.setMessage(R.string.delete_dialog_msg);
         builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                deleteit();
+                delete_record();
             }
         });
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -254,7 +254,7 @@ public class AddActivity extends AppCompatActivity implements
         alertDialog.show();
     }
 
-    private void deleteit() {
+    private void delete_record() {
         if (mCurrentUri != null) {
             int rowsDeleted = getContentResolver().delete(mCurrentUri, null, null);
             if (rowsDeleted == 0) {
