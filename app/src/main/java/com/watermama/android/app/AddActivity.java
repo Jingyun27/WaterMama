@@ -64,7 +64,7 @@ public class AddActivity extends AppCompatActivity implements
     }
 
 
-    private void savePet() {
+    private void saveRecord() {
         SimpleDateFormat sdf_date = new SimpleDateFormat("yyyy/MM/dd");
         SimpleDateFormat sdf_time = new SimpleDateFormat("HH:mm");
         Date now = new Date();
@@ -134,7 +134,7 @@ public class AddActivity extends AppCompatActivity implements
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_save:
-                savePet();
+                saveRecord();
                 finish();
                 return true;
             case R.id.action_delete:
