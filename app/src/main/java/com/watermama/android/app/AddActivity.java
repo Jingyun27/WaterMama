@@ -27,6 +27,8 @@ import com.watermama.android.app.data.WatermamaContract.Entry;
 
 public class AddActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
+    private String dateString;
+    private String timeString;
     private static final int EXISTING_PET_LOADER = 0;
     private Uri mCurrentUri;
     private EditText mDateEditText;
@@ -38,6 +40,7 @@ public class AddActivity extends AppCompatActivity implements
         public boolean onTouch(View view, MotionEvent motionEvent) {
             mHasChanged = true;
             return false;
+
         }
     };
     @Override
@@ -55,28 +58,30 @@ public class AddActivity extends AppCompatActivity implements
         }
 
 
+
+
         mDateEditText = (EditText) findViewById(R.id.edit_date);
         mTimeEditText = (EditText) findViewById(R.id.edit_time);
         mVolumeEditText = (EditText) findViewById(R.id.edit_volume);
         mDateEditText.setOnTouchListener(mTouchListener);
         mTimeEditText.setOnTouchListener(mTouchListener);
         mVolumeEditText.setOnTouchListener(mTouchListener);
+
+        SimpleDateFormat sdf_date = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat sdf_time = new SimpleDateFormat("HH:mm");
+        Date now = new Date();
+        dateString = sdf_date.format(now);
+        timeString = sdf_time.format(now);
+        mDateEditText.setText(dateString);
+        mTimeEditText.setText(timeString);
+
     }
 
 
     private void saveRecord() {
-        SimpleDateFormat sdf_date = new SimpleDateFormat("yyyy/MM/dd");
-        SimpleDateFormat sdf_time = new SimpleDateFormat("HH:mm");
-        Date now = new Date();
-        String dateString = mDateEditText.getText().toString().trim();
-        if("".equals(dateString)){
-            dateString = sdf_date.format(now);
-        }
-        String timeString = mTimeEditText.getText().toString().trim();
-        if("".equals(timeString)){
-            timeString = sdf_time.format(now);
-        }
 
+        dateString = mDateEditText.getText().toString().trim();
+        timeString = mTimeEditText.getText().toString().trim();
         String volumeString = mVolumeEditText.getText().toString().trim();
 
         if (mCurrentUri == null &&

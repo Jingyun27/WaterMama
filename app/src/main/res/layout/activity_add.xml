@@ -27,16 +27,14 @@
             android:layout_weight="2"
             android:paddingLeft="4dp"
             android:orientation="vertical">
-
+            <!--android:hint="@string/hint_date"--><!--android:hint="@string/hint_time"-->
             <EditText
                 android:id="@+id/edit_date"
-                android:hint="@string/hint_date"
                 android:inputType="textCapWords"
                 style="@style/EditorFieldStyle" />
 
             <EditText
                 android:id="@+id/edit_time"
-                android:hint="@string/hint_time"
                 android:inputType="textCapWords"
                 style="@style/EditorFieldStyle" />
         </LinearLayout>
