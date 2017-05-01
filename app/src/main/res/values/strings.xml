@@ -12,7 +12,7 @@
 
     <string name="action_history">History</string>
     <string name="action_mailtowatermama_1">Water Consumption Consultation</string>
-    <string name="action_mailtowatermama_2">Customize Your App</string>
+    <string name="action_mailtowatermama_2">Customized WaterMama Service</string>
     <!-- Title text for the empty view, which describes the empty dog house image [CHAR LIMIT=50] -->
     <string name="empty_view_title_text">It\'s a bit lonely here</string>
 
